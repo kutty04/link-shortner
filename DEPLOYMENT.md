@@ -18,32 +18,38 @@ Click "Deploy" and wait for the build to complete. Your site will be live!
 
 ---
 
-## GitHub Actions - Database Cron Job
+## GitHub Actions - Keep Alive Ping
 
 ### What's Configured
-The `.github/workflows/database-cron.yml` runs daily at 2 AM UTC to perform database maintenance tasks.
+The `.github/workflows/database-cron.yml` pings your app every 6 hours to keep it and the database alive (prevents Vercel free tier from going idle).
 
-### Configure the Cron Job
-You need to set up GitHub Secrets first:
+### Update After Deployment
+Once your Vercel app is deployed, update the workflow:
 
-1. Go to your GitHub repo → Settings → Secrets and variables → Actions
-2. Add these secrets:
-   - `SUPABASE_API_KEY`: Your Supabase service role key (get from Supabase dashboard)
-   - `SUPABASE_CRON_WEBHOOK`: The webhook endpoint to call (create in Supabase or your app)
+1. Edit `.github/workflows/database-cron.yml`
+2. Replace `https://your-app.vercel.app/api/ping` with your actual Vercel URL
+   - Example: `https://linksnip.vercel.app/api/ping`
+3. Push the update: `git push`
 
-### Edit the Cron Schedule
-Edit `.github/workflows/database-cron.yml` to change the schedule. Cron syntax:
-```
-minute hour day month day-of-week
-  0     2    *   *      *        # Daily at 2 AM UTC
-```
+### How It Works
+- Every 6 hours, GitHub Actions calls `/api/ping`
+- The endpoint checks your database connection
+- Returns `status: ok` if everything is working
+
+**No GitHub secrets needed!** ✅
 
 ---
 
 ## What You Need to Do
 
 1. **Push to GitHub**: `git push origin main`
-2. **Connect Vercel**: Follow Step 1-3 above
-3. **Configure Cron Job**: Add GitHub secrets for database maintenance
+2. **Connect Vercel**: 
+   - Go to [vercel.com](https://vercel.com)
+   - Import your GitHub repo
+   - Add environment variables: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+   - Click Deploy
+3. **Update Cron Job**: 
+   - Once Vercel gives you a URL (e.g., `https://linksnip.vercel.app`), update `.github/workflows/database-cron.yml` with your actual app URL
+   - Push the update
 
-Your app will auto-deploy when you push to GitHub! 🚀
+Your app will auto-deploy and auto-ping every 6 hours to stay alive! 🚀
