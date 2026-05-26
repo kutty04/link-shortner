@@ -88,14 +88,14 @@ export default function AnalyticsPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="max-w-3xl mx-auto px-4 py-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 sm:py-10 w-full">
         <button onClick={() => navigate('/dashboard')} className="flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--text)] mb-6 transition-colors">
           <ArrowLeft size={15} /> Back to dashboard
         </button>
 
         {/* Header */}
         <div className="card mb-6">
-          <div className="flex items-start justify-between gap-3">
+          <div className="flex flex-col sm:flex-row items-start justify-between gap-3">
             <div className="flex-1 min-w-0">
               {link.title && <p className="font-bold mb-1">{link.title}</p>}
               <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
           {[
             { label: 'Today', val: clicks.filter(c => new Date(c.clicked_at).toDateString() === new Date().toDateString()).length },
             { label: 'This Week', val: clicks.filter(c => Date.now() - new Date(c.clicked_at) < 7*86400000).length },
@@ -149,7 +149,7 @@ export default function AnalyticsPage() {
             </div>
 
             {/* Pie charts */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               {[
                 { title: 'Devices', data: deviceData },
                 { title: 'Browsers', data: browserData },
@@ -162,12 +162,16 @@ export default function AnalyticsPage() {
                     <p className="text-xs text-[var(--muted)]">No data</p>
                   ) : (
                     <>
-                      <PieChart width={150} height={100}>
-                        <Pie data={data} cx={70} cy={50} outerRadius={40} dataKey="value">
-                          {data.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
-                        </Pie>
-                        <Tooltip contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 11 }} />
-                      </PieChart>
+                      <div className="w-full" style={{ height: 100 }}>
+                        <ResponsiveContainer width="100%" height={100}>
+                          <PieChart>
+                            <Pie data={data} cx="50%" cy="50%" outerRadius={40} dataKey="value">
+                              {data.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                            </Pie>
+                            <Tooltip contentStyle={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 11 }} />
+                          </PieChart>
+                        </ResponsiveContainer>
+                      </div>
                       <div className="space-y-1 mt-2">
                         {data.slice(0, 4).map(({ name, value }, i) => (
                           <div key={name} className="flex items-center justify-between text-xs">

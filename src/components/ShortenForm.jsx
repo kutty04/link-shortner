@@ -60,7 +60,7 @@ export default function ShortenForm() {
 
   if (result) {
     return (
-      <div className="card accent-glow max-w-xl mx-auto">
+      <div className="card accent-glow w-full">
         <div className="flex items-center gap-2 mb-4">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
           <span className="text-green-400 text-sm font-bold mono">LINK CREATED</span>
@@ -76,7 +76,7 @@ export default function ShortenForm() {
           </a>
         </div>
 
-        <div className="flex gap-3 items-start">
+        <div className="flex flex-col sm:flex-row gap-3 items-start">
           <div className="flex-1">
             <p className="text-xs text-[var(--muted)] mb-1">Original URL</p>
             <p className="text-xs text-[var(--text)] truncate mono">{result.original_url}</p>
@@ -94,22 +94,22 @@ export default function ShortenForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="card max-w-xl mx-auto">
+    <form onSubmit={handleSubmit} className="card w-full">
       <div className="flex items-center gap-2 mb-5">
         <Link2 size={18} className="text-[#6c63ff]" />
         <span className="font-bold text-sm">Shorten a URL</span>
       </div>
 
-      <div className="flex gap-2 mb-3">
+      <div className="flex flex-col sm:flex-row gap-2 mb-3">
         <input
-          className="input-field"
+          className="input-field flex-1 min-w-0"
           placeholder="https://your-long-url.com/goes-here"
           value={url}
           onChange={e => setUrl(e.target.value)}
           required
           type="url"
         />
-        <button type="submit" className="btn-primary flex items-center gap-2 whitespace-nowrap" disabled={loading}>
+        <button type="submit" className="btn-primary flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto" disabled={loading}>
           <Zap size={15} />
           {loading ? '...' : 'Snip'}
         </button>
@@ -129,7 +129,7 @@ export default function ShortenForm() {
 
       {showAdvanced && (
         <div className="space-y-3 p-3 rounded-lg mb-3" style={{ background: 'var(--surface2)', border: '1px solid var(--border)' }}>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
               <label className="text-xs text-[var(--muted)] mb-1 block">Custom alias</label>
               <input className="input-field text-sm py-1.5" placeholder="my-link" value={alias} onChange={e => setAlias(e.target.value.replace(/[^a-zA-Z0-9-]/g, ''))} />
@@ -139,7 +139,7 @@ export default function ShortenForm() {
               <input className="input-field text-sm py-1.5" placeholder="Campaign name" value={title} onChange={e => setTitle(e.target.value)} />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
               <label className="text-xs text-[var(--muted)] mb-1 block">Expires at</label>
               <input className="input-field text-sm py-1.5" type="datetime-local" value={expiresAt} onChange={e => setExpiresAt(e.target.value)} />
@@ -161,7 +161,7 @@ export default function ShortenForm() {
           </button>
 
           {showUTM && (
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {['source', 'medium', 'campaign', 'term', 'content'].map(k => (
                 <div key={k}>
                   <label className="text-xs text-[var(--muted)] mb-1 block capitalize">utm_{k}</label>

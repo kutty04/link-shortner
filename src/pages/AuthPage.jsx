@@ -35,8 +35,8 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="card w-full max-w-sm">
+    <div className="min-h-screen flex items-center justify-center px-4 py-8 sm:py-12">
+      <div className="card w-full max-w-sm mx-auto">
         <div className="flex items-center gap-2 mb-6 justify-center">
           <Scissors size={22} className="text-[#6c63ff]" />
           <span className="text-xl font-extrabold" style={{ fontFamily: 'Syne' }}>

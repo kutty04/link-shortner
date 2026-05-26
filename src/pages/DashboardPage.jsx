@@ -30,20 +30,20 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <div className="max-w-2xl mx-auto px-4 py-10">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-8 sm:py-10 w-full">
         <div className="mb-8">
-          <h1 className="text-2xl font-extrabold mb-1" style={{ fontFamily: 'Syne' }}>Dashboard</h1>
+          <h1 className="text-xl sm:text-2xl font-extrabold mb-1" style={{ fontFamily: 'Syne' }}>Dashboard</h1>
           <p className="text-sm text-[var(--muted)]">{user?.email}</p>
         </div>
 
         {/* Stats bar */}
-        <div className="grid grid-cols-2 gap-3 mb-8">
+        <div className="grid grid-cols-2 gap-3 mb-6 sm:mb-8">
           <div className="card text-center">
-            <p className="text-3xl font-extrabold mono text-[#6c63ff]">{links.length}</p>
+            <p className="text-2xl sm:text-3xl font-extrabold mono text-[#6c63ff]">{links.length}</p>
             <p className="text-xs text-[var(--muted)] mt-1">Total Links</p>
           </div>
           <div className="card text-center">
-            <p className="text-3xl font-extrabold mono text-[#ff6584]">{totalClicks}</p>
+            <p className="text-2xl sm:text-3xl font-extrabold mono text-[#ff6584]">{totalClicks}</p>
             <p className="text-xs text-[var(--muted)] mt-1">Total Clicks</p>
           </div>
         </div>

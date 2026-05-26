@@ -43,7 +43,7 @@ export default function LinkCard({ link, onDelete, onToggle }) {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-3 pt-3 border-t border-[var(--border)]">
+      <div className="flex flex-wrap items-center gap-2 mt-3 pt-3 border-t border-[var(--border)]">
         {/* Stats */}
         <div className="flex items-center gap-1 text-xs text-[var(--muted)]">
           <BarChart2 size={12} />
@@ -70,7 +70,7 @@ export default function LinkCard({ link, onDelete, onToggle }) {
         )}
 
         {/* Actions */}
-        <div className="ml-auto flex items-center gap-1">
+        <div className="ml-auto flex items-center gap-1 flex-shrink-0">
           <button
             onClick={() => setShowQR(!showQR)}
             className="p-1.5 rounded hover:bg-[var(--surface2)] transition-colors text-xs text-[var(--muted)]"

@@ -136,18 +136,21 @@ export default function HomePage() {
         : "'Syne', 'Space Mono', sans-serif",
       transition: 'background 0.4s ease, color 0.4s ease',
       overflowX: 'hidden',
+      width: '100%',
+      maxWidth: '100vw',
     }}>
 
       {/* Theme Switcher Bar */}
       <div style={{
         position: 'fixed',
-        bottom: '24px',
-        right: '16px',
+        bottom: '16px',
+        right: '12px',
         zIndex: 999,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end',
         gap: '8px',
+        maxWidth: 'calc(100vw - 24px)',
       }}>
         {showThemePicker && (
           <div style={{
@@ -215,10 +218,11 @@ export default function HomePage() {
       {/* Hero Section */}
       <div style={{
         position: 'relative',
-        padding: '100px 16px 60px',
+        padding: 'clamp(60px, 10vw, 100px) 16px clamp(40px, 6vw, 60px)',
         textAlign: 'center',
         overflow: 'hidden',
-        maxWidth: '100vw',
+        maxWidth: '100%',
+        boxSizing: 'border-box',
       }}>
 
         {/* Background decorations */}
